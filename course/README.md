@@ -93,5 +93,3 @@ SET halo_watch_pmc_list=''; -- 关闭
 - PostgreSQL 16源码及文件布局文档：https://www.postgresql.org/docs/16/storage-file-layout.html
 - Linux perf ABI：`include/uapi/linux/perf_event.h`，https://github.com/torvalds/linux/blob/master/include/uapi/linux/perf_event.h
 - Linux perf元数据页说明：https://www.kernel.org/doc/html/latest/userspace-api/perf_ring_buffer.html
-
-本作业尚未发送给老师，提交链接由本人审查后使用。
