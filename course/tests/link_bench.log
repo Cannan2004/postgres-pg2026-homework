@@ -1,0 +1,20 @@
+PASS: 32..512-byte binary keys, 302 nodes/size, duplicates, first/last/missing, ring invariants, invalid input
+CPU=0
+
+memcmp+same-slab baseline nodes=10000 payload=64 searches=10000 elapsed_ms=184.226 ns/search=18422.6
+instructions=1625611624 coverage=100.00% fast_reads=0 syscall_reads=2
+cycles=801774657 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_access=562640394 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_miss=96657109 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_write_access=62577689 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_hit_rate=82.821%
+memory_accesses_L1D_reads_plus_writes=625218083
+
+prefix+slab nodes=10000 payload=64 searches=10000 elapsed_ms=181.362 ns/search=18136.2
+instructions=563211621 coverage=100.00% fast_reads=0 syscall_reads=2
+cycles=794294756 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_access=250182891 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_miss=96667403 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_write_access=95189 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_hit_rate=61.361%
+memory_accesses_L1D_reads_plus_writes=250278080

@@ -22,6 +22,7 @@
  */
 
 #include "postgres.h"
+#include "utils/halo_pmc.h"
 
 #include <math.h>
 #include <limits.h>
@@ -144,6 +145,7 @@ MultiExecPrivateHash(HashState *node)
 	TupleTableSlot *slot;
 	ExprContext *econtext;
 	uint32		hashvalue;
+	HaloPmcScope *pmc;
 
 	/*
 	 * get state info from node
@@ -161,11 +163,13 @@ MultiExecPrivateHash(HashState *node)
 	 * Get all tuples from the node below the Hash node and insert into the
 	 * hash table (or temp files).
 	 */
+	pmc = HaloPmcBegin();
 	for (;;)
 	{
 		slot = ExecProcNode(outerNode);
 		if (TupIsNull(slot))
 			break;
+		HaloPmcTupleBegin(pmc);
 		/* We have to compute the hash value */
 		econtext->ecxt_outertuple = slot;
 		if (ExecHashGetHashValue(hashtable, econtext, hashkeys,
@@ -189,7 +193,9 @@ MultiExecPrivateHash(HashState *node)
 			}
 			hashtable->totalTuples += 1;
 		}
+		HaloPmcTupleEnd(pmc);
 	}
+	HaloPmcEnd(pmc);
 
 	/* resize the hash table if needed (NTUP_PER_BUCKET exceeded) */
 	if (hashtable->nbuckets != hashtable->nbuckets_optimal)

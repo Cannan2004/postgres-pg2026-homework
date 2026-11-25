@@ -3,6 +3,8 @@
 backend_sources += files(
   'conffiles.c',
   'guc.c',
+  'halo_pmc.c',
+  'perf_counter.c',
   'guc_funcs.c',
   'guc_tables.c',
   'help_config.c',

@@ -1,0 +1,1 @@
+PASS: delta scaling, zero-time rejection, invalid-event cleanup, software read fallback, mmap index-zero metadata; checksum=499999500000

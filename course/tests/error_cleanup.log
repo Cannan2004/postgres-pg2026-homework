@@ -1,0 +1,54 @@
+SET
+SET
+SET
+SET
+SET
+psql:course/tests/error_cleanup.sql:7: INFO:  HaloPMC MultiExecPrivateHash mode=whole_build samples=1
+psql:course/tests/error_cleanup.sql:7: INFO:  HaloPMC instructions count=13908235 coverage=100.00% valid=1 invalid=0 rdpmc=0 read=2
+ count
+-------
+ 10000
+(1 row)
+
+ fds_before
+------------
+         19
+(1 row)
+
+SET
+psql:course/tests/error_cleanup.sql:11: ERROR:  HaloPMC unknown event: unknown_event_for_test
+psql:course/tests/error_cleanup.sql:12: ERROR:  HaloPMC unknown event: unknown_event_for_test
+psql:course/tests/error_cleanup.sql:13: ERROR:  HaloPMC unknown event: unknown_event_for_test
+SET
+ fds_after_errors
+------------------
+               19
+(1 row)
+
+SET
+SET
+psql:course/tests/error_cleanup.sql:19: INFO:  HaloPMC MultiExecPrivateHash mode=per_tuple samples=10000
+psql:course/tests/error_cleanup.sql:19: INFO:  HaloPMC instructions count=8864261 coverage=100.00% valid=10000 invalid=0 rdpmc=0 read=20000
+ recovered_result
+------------------
+            10000
+(1 row)
+
+SET
+ fds_after_recovery
+--------------------
+                 19
+(1 row)
+
+INSERT 0 1
+SET
+psql:course/tests/error_cleanup.sql:25: INFO:  HaloPMC unsupported_test unavailable: No such file or directory
+psql:course/tests/error_cleanup.sql:25: INFO:  HaloPMC MultiExecPrivateHash mode=per_tuple samples=10000
+psql:course/tests/error_cleanup.sql:25: INFO:  HaloPMC unsupported_test count=N/A valid=0 invalid=10000
+ unavailable_event_result
+--------------------------
+                    10000
+(1 row)
+
+SET
+DELETE 1

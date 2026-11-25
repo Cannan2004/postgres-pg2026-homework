@@ -19,6 +19,7 @@
  *--------------------------------------------------------------------
  */
 #include "postgres.h"
+#include "utils/halo_pmc.h"
 
 #include <float.h>
 #include <limits.h>
@@ -819,6 +820,12 @@ StaticAssertDecl(lengthof(config_type_names) == (PGC_ENUM + 1),
 
 struct config_bool ConfigureNamesBool[] =
 {
+	{
+		{"halo_pmc_per_tuple", PGC_SUSET, STATS_MONITORING,
+			gettext_noop("Measure hash insertion with low-overhead snapshots."), NULL},
+		&halo_pmc_per_tuple, false, NULL, NULL, NULL
+	},
+
 	{
 		{"enable_seqscan", PGC_USERSET, QUERY_TUNING_METHOD,
 			gettext_noop("Enables the planner's use of sequential-scan plans."),
@@ -3814,6 +3821,12 @@ struct config_real ConfigureNamesReal[] =
 
 struct config_string ConfigureNamesString[] =
 {
+	{
+		{"halo_watch_pmc_list", PGC_SUSET, STATS_MONITORING,
+			gettext_noop("Comma-separated PMC event names; empty disables profiling."), NULL},
+		&halo_watch_pmc_list, "", NULL, NULL, NULL
+	},
+
 	{
 		{"archive_command", PGC_SIGHUP, WAL_ARCHIVING,
 			gettext_noop("Sets the shell command that will be called to archive a WAL file."),

@@ -1,0 +1,22 @@
+cc -I../common -O1 -g -std=c11 -Wall -Wextra -fsanitize=address,undefined -fno-omit-frame-pointer main.c link.c ../common/perf_counter.c -o link_sanitize
+./link_sanitize 1000 100 512
+PASS: 32..512-byte binary keys, 302 nodes/size, duplicates, first/last/missing, ring invariants, invalid input
+CPU=0
+
+memcmp+same-slab baseline nodes=1000 payload=512 searches=100 elapsed_ms=2.201 ns/search=22015.0
+instructions=36780916 coverage=100.00% fast_reads=0 syscall_reads=2
+cycles=9839572 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_access=5830289 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_miss=229244 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_write_access=1584573 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_hit_rate=96.068%
+memory_accesses_L1D_reads_plus_writes=7414862
+
+prefix+slab nodes=1000 payload=512 searches=100 elapsed_ms=0.215 ns/search=2150.0
+instructions=5066286 coverage=100.00% fast_reads=0 syscall_reads=2
+cycles=996074 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_access=645314 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_miss=222914 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_write_access=3598 coverage=100.00% fast_reads=0 syscall_reads=2
+L1D_read_hit_rate=65.457%
+memory_accesses_L1D_reads_plus_writes=648912

@@ -1,0 +1,4 @@
+link_bench
+link_sanitize
+tests/test_perf
+*.o

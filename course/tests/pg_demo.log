@@ -1,0 +1,90 @@
+CREATE TABLE
+INSERT 0 6
+CREATE SCHEMA
+SET
+psql:course/sql/demo.sql:5: NOTICE:  table "r" does not exist, skipping
+psql:course/sql/demo.sql:5: NOTICE:  table "s" does not exist, skipping
+DROP TABLE
+SELECT 10000
+SELECT 10000
+ANALYZE
+ANALYZE
+SET
+SET
+SET
+SET
+ baseline
+----------
+     4950
+(1 row)
+
+SET
+SET
+psql:course/sql/demo.sql:16: INFO:  HaloPMC MultiExecPrivateHash mode=whole_build samples=1
+psql:course/sql/demo.sql:16: INFO:  HaloPMC instructions count=12225166 coverage=100.00% valid=1 invalid=0 rdpmc=0 read=2
+psql:course/sql/demo.sql:16: INFO:  HaloPMC cycles count=3765202 coverage=100.00% valid=1 invalid=0 rdpmc=0 read=2
+psql:course/sql/demo.sql:16: INFO:  HaloPMC perf_count_hw_cache_l1d_rd count=3973548 coverage=100.00% valid=1 invalid=0 rdpmc=0 read=2
+psql:course/sql/demo.sql:16: INFO:  HaloPMC perf_count_hw_cache_l1d_miss_rd count=15815 coverage=100.00% valid=1 invalid=0 rdpmc=0 read=2
+                          QUERY PLAN
+--------------------------------------------------------------
+ Aggregate (actual rows=1 loops=1)
+   ->  Hash Join (actual rows=4950 loops=1)
+         Hash Cond: (r.id = s.id)
+         ->  Seq Scan on r (actual rows=10000 loops=1)
+         ->  Hash (actual rows=4950 loops=1)
+               Buckets: 8192  Batches: 1  Memory Usage: 239kB
+               ->  Seq Scan on s (actual rows=4950 loops=1)
+                     Filter: (value > 100)
+                     Rows Removed by Filter: 5050
+ Planning Time: 0.038 ms
+ Execution Time: 15.207 ms
+(11 rows)
+
+SET
+psql:course/sql/demo.sql:18: INFO:  HaloPMC MultiExecPrivateHash mode=per_tuple samples=4950
+psql:course/sql/demo.sql:18: INFO:  HaloPMC instructions count=5739357 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+psql:course/sql/demo.sql:18: INFO:  HaloPMC cycles count=4776572 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+psql:course/sql/demo.sql:18: INFO:  HaloPMC perf_count_hw_cache_l1d_rd count=1906195 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+psql:course/sql/demo.sql:18: INFO:  HaloPMC perf_count_hw_cache_l1d_miss_rd count=26780 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+ instrumented
+--------------
+         4950
+(1 row)
+
+psql:course/sql/demo.sql:20: INFO:  HaloPMC MultiExecPrivateHash mode=per_tuple samples=4950
+psql:course/sql/demo.sql:20: INFO:  HaloPMC instructions count=5739355 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+psql:course/sql/demo.sql:20: INFO:  HaloPMC cycles count=4623067 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+psql:course/sql/demo.sql:20: INFO:  HaloPMC perf_count_hw_cache_l1d_rd count=1906194 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+psql:course/sql/demo.sql:20: INFO:  HaloPMC perf_count_hw_cache_l1d_miss_rd count=23740 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+ repeated
+----------
+     4950
+(1 row)
+
+SET
+psql:course/sql/demo.sql:22: INFO:  HaloPMC MultiExecPrivateHash mode=per_tuple samples=4950
+psql:course/sql/demo.sql:22: INFO:  HaloPMC task_clock count=1658600 coverage=100.00% valid=4950 invalid=0 rdpmc=0 read=9900
+ software_fallback
+-------------------
+              4950
+(1 row)
+
+SET
+psql:course/sql/demo.sql:24: NOTICE:  table "vage" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+INSERT 0 5
+CHECKPOINT
+        data_directory         | relative_path | bytes
+-------------------------------+---------------+-------
+ /home/zjn/pg-course-2026/data | base/5/16400  |  8192
+(1 row)
+
+ id1 |    c1     | id2 |    c2
+-----+-----------+-----+-----------
+   1 | AAAAAAAA1 | 101 | aaaaaaaa1
+   2 | AAAAAAAA2 | 102 | aaaaaaaa2
+   3 | AAAAAAAA3 | 103 | aaaaaaaa3
+   4 | AAAAAAAA4 | 104 | aaaaaaaa4
+   5 | AAAAAAAA5 | 105 | aaaaaaaa5
+(5 rows)
